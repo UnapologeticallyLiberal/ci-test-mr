@@ -2,7 +2,7 @@ image: microsoft/dotnet:latest
 
 stages:
     - build
-    - test
+    - deploy
 
 variables:
     SRC: "WebApplication1Core"
