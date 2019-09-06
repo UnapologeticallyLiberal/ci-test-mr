@@ -5,7 +5,8 @@ stages:
     - test
 
 variables:
-    SRC: "WebApplication1Core"
+    - SRC: "WebApplication1Core"
+    - REPO_NAME: gitlab.com/ebsone/ci-test-MR
 
 before_script:
     - "cd $SRC"
@@ -19,3 +20,13 @@ build:
         paths:
         - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.dll
         - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.Views.dll
+
+docker:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.$REPO_NAME $SRC
+    - docker push registry.$REPO_NAME
