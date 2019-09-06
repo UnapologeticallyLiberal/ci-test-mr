@@ -1,0 +1,17 @@
+image: microsoft/dotnet:latest
+
+stages:
+    - build
+    - test
+
+variables:
+    SRC: "WebApplication1Core"
+
+before_script:
+    - "cd $SRC"
+    - "dotnet restore"
+
+build:
+    stage: build
+    script:
+        - "dotnet build"
