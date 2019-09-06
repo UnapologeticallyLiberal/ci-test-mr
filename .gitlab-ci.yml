@@ -5,8 +5,8 @@ stages:
     - test
 
 variables:
-    - SRC: "WebApplication1Core"
-    - REPO_NAME: "gitlab.com/ebsone/ci-test-MR"
+    SRC: "WebApplication1Core"
+    REPO_NAME: "gitlab.com/ebsone/ci-test-MR"
 
 before_script:
     - "cd $SRC"
