@@ -16,6 +16,6 @@ build:
     script:
         - "dotnet build"
     artifacts:
-    paths:
-      - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.dll
-      - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.Views.dll
+        paths:
+        - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.dll
+        - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.Views.dll
