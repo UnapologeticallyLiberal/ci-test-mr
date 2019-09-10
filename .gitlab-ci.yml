@@ -19,6 +19,8 @@ build:
         paths:
         - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.dll
         - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.Views.dll
+    only:
+    - /^v.*$/
 
 docker:
   image: docker:latest
