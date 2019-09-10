@@ -2,16 +2,32 @@ image: microsoft/dotnet:latest
 
 stages:
     - build
-    - test
+    - deploy
 
 variables:
     SRC: "WebApplication1Core"
-
-before_script:
-    - "cd $SRC"
-    - "dotnet restore"
+    REPO_NAME: "gitlab.com/ebsone/ci-test-mr"
 
 build:
     stage: build
+    before_script:
+    - "cd $SRC"
+    - "dotnet restore"
     script:
         - "dotnet build"
+    artifacts:
+        paths:
+        - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.dll
+        - /builds/ebsone/ci-test-mr/WebApplication1Core/WebApplication1Core/bin/Debug/netcoreapp2.1/WebApplication1Core.Views.dll
+
+docker:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: deploy
+  before_script:
+  - "cd $SRC"
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.$REPO_NAME -f WebApplication1Core/Dockerfile .
+    - docker push registry.$REPO_NAME
