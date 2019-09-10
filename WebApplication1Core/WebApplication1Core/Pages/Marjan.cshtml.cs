@@ -15,7 +15,10 @@ namespace WebApplication1Core.Pages
 
         public void OnGet()
         {
-            Message = "Nachricht von Sam 123!";
+            Random random = new Random();
+            int randomNumber = random.Next(0, 100);
+
+            Message = "Nachricht von Sam 123! - (" + randomNumber.ToString() + ")"; 
         }
 
 
