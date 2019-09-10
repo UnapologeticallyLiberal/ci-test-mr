@@ -29,5 +29,5 @@ docker:
   - "cd $SRC"
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker build -t registry.$REPO_NAME -f $SRC/WebApplication1Core/Dockerfile
+    - docker build -t registry.$REPO_NAME -f $SRC/WebApplication1Core/Dockerfile .
     - docker push registry.$REPO_NAME
