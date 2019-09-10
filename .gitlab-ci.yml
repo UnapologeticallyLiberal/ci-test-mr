@@ -29,5 +29,12 @@ docker:
   - "cd $SRC"
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker build -t registry.$REPO_NAME -f WebApplication1Core/Dockerfile .
-    - docker push registry.$REPO_NAME
+    - docker pull registry.$REPO_NAME:build   || true
+    - docker pull registry.$REPO_NAME:publish || true
+    - docker pull registry.$REPO_NAME:latest  || true
+    - docker build --target build --cache-from=registry.$REPO_NAME:build --tag registry.$REPO_NAME:build -f WebApplication1Core/Dockerfile .
+    - docker build --target publish --cache-from=registry.$REPO_NAME:build --cache-from=registry.$REPO_NAME:publish --tag registry.$REPO_NAME:publish -f WebApplication1Core/Dockerfile .
+    - docker build --target final --cache-from=registry.$REPO_NAME:build --cache-from=registry.$REPO_NAME:publish --cache-from=registry.$REPO_NAME:latest --tag registry.$REPO_NAME:latest -f WebApplication1Core/Dockerfile .
+    - docker push registry.$REPO_NAME:build
+    - docker push registry.$REPO_NAME:publish
+    - docker push registry.$REPO_NAME:latest
