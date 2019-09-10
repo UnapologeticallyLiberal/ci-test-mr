@@ -26,8 +26,8 @@ docker:
     - docker:dind
   stage: deploy
   before_script:
-  - "cd $SRC"
+  - "cd $SRC/$SRC"
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-    - docker build -t registry.$REPO_NAME $SRC
+    - docker build -t registry.$REPO_NAME $SRC/$SRC
     - docker push registry.$REPO_NAME
