@@ -18,7 +18,7 @@ namespace WebApplication1Core.Pages
             Random random = new Random();
             int randomNumber = random.Next(0, 100);
 
-            Message = "Nachricht von Sam 123! - (" + randomNumber.ToString() + ")"; 
+            Message = "Nachricht von Marjan! - (" + randomNumber.ToString() + ")"; 
         }
 
 
