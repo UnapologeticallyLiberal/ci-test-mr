@@ -8,12 +8,11 @@ variables:
     SRC: "WebApplication1Core"
     REPO_NAME: "gitlab.com/ebsone/ci-test-MR"
 
-before_script:
-    - "cd $SRC"
-    - "dotnet restore"
-
 build:
     stage: build
+    before_script:
+    - "cd $SRC"
+    - "dotnet restore"
     script:
         - "dotnet build"
     artifacts:
