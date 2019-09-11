@@ -23,9 +23,9 @@ build:
     - /^v.*$/
 
 docker:
-  image: yobasystems/alpine-docker:latest
+  image: yobasystems/alpine-docker:dind
   services:
-    - yobasystems/alpine-docker:dind
+    - docker:dind
   stage: deploy
   before_script:
   - "cd $SRC"
