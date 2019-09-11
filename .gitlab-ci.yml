@@ -1,4 +1,4 @@
-image: alpine:3.5
+image: microsoft/dotnet:latest
 
 stages:
     - build
@@ -7,7 +7,6 @@ stages:
 variables:
     SRC: "WebApplication1Core"
     REPO_NAME: "gitlab.com/ebsone/ci-test-mr"
-    DOCKER_DRIVER: overlay2
 
 build:
     stage: build
@@ -24,7 +23,7 @@ build:
     - /^v.*$/
 
 docker:
-  image: docker:latest
+  image: yobasystems/alpine-docker:latest
   services:
     - docker:dind
   stage: deploy
