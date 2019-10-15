@@ -1,0 +1,34 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Sign into Docker registry
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PW }}
+        DOCKER_REGISTRY_URL: docker.pkg.github.com
+    - name: Remove old Docker image
+      run: |
+        docker images -a 
+        docker rmi --force 'latest'
+    - name: Build Docker image
+      run: | 
+        cd WebApplication1Core
+        docker images -a 
+        docker build -t docker.pkg.github.com/ebsone/ci-test-mr/webapplication1core:latest -f WebApplication1Core/Dockerfile .
+    - name: Push Docker image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PW }}
+        DOCKER_REGISTRY_URL: docker.pkg.github.com
+      run: |
+        docker push docker.pkg.github.com/ebsone/ci-test-mr/webapplication1core:latest
