@@ -24,11 +24,11 @@ jobs:
       run: | 
         cd WebApplication1Core
         docker images -a 
-        docker build -t docker.pkg.github.com/ebsone/ci-test-mr/webapplication1core:latest -f WebApplication1Core/Dockerfile .
+        docker build -t docker.pkg.github.com/ebsone/ci-test-mr/webapplication1corenew:latest -f WebApplication1Core/Dockerfile .
     - name: Push Docker image
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PW }}
         DOCKER_REGISTRY_URL: docker.pkg.github.com
       run: |
-        docker push docker.pkg.github.com/ebsone/ci-test-mr/webapplication1core:latest
+        docker push docker.pkg.github.com/ebsone/ci-test-mr/webapplication1corenew:latest
