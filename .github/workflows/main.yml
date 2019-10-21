@@ -40,7 +40,7 @@ jobs:
         args: container:login
     - name: Heroku Push
       run: |
-        docker push registry.heroku.com/ci-test-mr/web
+        docker push registry.heroku.com/ci-test-mr/web:latest
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     - name: Heroku Release
