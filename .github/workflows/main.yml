@@ -39,11 +39,10 @@ jobs:
       with:
         args: container:login
     - name: Heroku Push
-      uses: actions/heroku@master
+      run: |
+        docker push registry.heroku.com/ci-test-mr/web
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:push -a ci-test-mr web
     - name: Heroku Release
       uses: actions/heroku@master
       env:
