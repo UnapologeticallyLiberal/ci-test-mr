@@ -32,3 +32,21 @@ jobs:
         DOCKER_REGISTRY_URL: docker.pkg.github.com
       run: |
         docker push docker.pkg.github.com/ebsone/ci-test-mr/webapplication1corenew:latest
+    - name: Heroku Login
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:login
+    - name: Heroku Push
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:push -a ci-test-mr web
+    - name: Heroku Release
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:release -a ci-test-mr web
