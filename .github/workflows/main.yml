@@ -49,4 +49,4 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        args: container:release -a ci-test-mr web
+        args: containeru:release -a ci-test-mr webapplication1corenew:latest
